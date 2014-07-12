@@ -1,7 +1,12 @@
----
-layout: default
-title: 全检报告
----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, minimal-ui" />
+<meta name="keywords" content="tools" />
+<meta name="description" content="Perry's tools" />
+<title>报告</title>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <style>
 h2{ margin-bottom: 4px;}
 .form{ margin-right: 300px;}
@@ -31,6 +36,8 @@ button{ padding: 4px 10px; font-size: 16px;}
 .desc table{ width: 80%}
 .desc thead td{ font-weight: bold;}
 </style>
+</head>
+<body>
 <script type="text/template" id="J_item">
   <div class="item">
   <button class="del">删除<br>此行</button>
@@ -308,3 +315,5 @@ formcontent.on("click",".del", function(){
   $(this).select();
 });
 </script>
+</body>
+</html>
