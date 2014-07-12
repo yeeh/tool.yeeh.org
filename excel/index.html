@@ -1,20 +1,310 @@
 ---
 layout: default
-title: 全检报表生成器
+title: 全检报告
 ---
 <style>
-html,body,div,h1,h2,p,a{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;}
-body{font:12px/1.5 tahoma,arial; color: #333; }
-div{position:absolute; top:30%; right:26%; padding-bottom:10%; text-align:right;}
-h1{font-size:18px;}
-p{margin-top:20px;}
-a{color: #333;text-decoration: none;margin-left:16px;font-weight: bold;-webkit-transition: color .2s linear;-moz-transition: color .2s linear;-ms-transition: color .2s linear;-o-transition: color .2s linear;transition: color .2s linear;}
-p:nth-child(2) a, a:hover{color: #999;}
-@media screen and (max-device-width:760px), media and (max-device-height:480px){
-    div{top:24%; right:20%;}
-}
-@media screen and (min-device-width:1280px), media and (min-device-height:900px){
-    div{top:36%; right:32%;}
-}
+h2{ margin-bottom: 4px;}
+.form{ margin-right: 300px;}
+.form div{ border-bottom:solid 1px #ddd;}
+.form label, .form input, .form textarea{ margin-top: 10px; font-size: 14px;}
+.form label{ color: #bbb; width: 80px; display: inline-block; text-align: right;}
+.form label span{ display: block; font-size: 12px; }
+.form input[type='text']{ width: 60px;}
+.form input[type='number']{ width: 50px;}
+.form button{ float: right;}
+.form textarea{ width: 200px; height: 200px; border: solid 1px #ddd;}
+.button{ width: 300px; position: fixed; right: 0 ;top: 5%; text-align: right;}
+.button button{ margin: 10px; border:solid 1px #ccc;}
+.button .toggle{ background-color: green;}
+button{ padding: 4px 10px; font-size: 16px;}
+.excel{ padding:100px 0 300px 0;}
+.excel table{ border-collapse: collapse; width: 100%}
+.excel td, .excel th{ border:solid 1px #333; text-align: center; vertical-align: middle;}
+.excel th{ width: 5%; }
+.excel tr:nth-child(odd) th{background-color: #999;}
+.excel tfoot td{ font-weight: bold;}
+.excel td[colspan='5']{ font-style: italic;}
+.excel td[colspan='6']{ text-align: right;}
+.desc{ padding: 4px 40px; font-size: 12px;}
+.desc p{ padding: 0; margin: 0;}
+.desc p label{ display: inline-block; width:200px;}
+.desc table{ width: 80%}
+.desc thead td{ font-weight: bold;}
 </style>
-<div>报表生成器</div>
+<script type="text/template" id="J_item">
+  <div class="item">
+  <button class="del">删除<br>此行</button>
+  <label>颜色:</label><input type="text" data="color" value="KAKA" />
+  <label>宽度:</label><input type="number" data="width" value="100" />
+  <label>缺陷点:</label><input type="number" data="point" value="4" />
+  <label>缺陷列数:</label><input type="number" data="col" value="10" />
+  <br>
+  <label>缺陷类型:</label><textarea data="type" placeholder="以换行分隔，例如：A:Pinhole针眼洞">
+A:Pinhole针眼洞
+B:Hole破洞
+C:Nep/Knot棉结
+D:Coarse Yarn粗纱
+E:Dirt/Oil stain脏纱
+F:Colour spot色污
+G:Colour yarn色纱
+H:Wrinkle streak皱印
+I:Float yarn油纱
+J:Mispick断纬
+K:Permanent crease死皱
+L:Barries横档
+M:Broken selvedge破边
+N:Stop mark停车档
+O:Float杂质
+S:Seam mark缝头印
+T:Water spot水渍
+U:White yarn蛇皮丝
+V:Broken yarn断纱
+W:Others其他</textarea>
+<label>材料长度:</label><textarea data="leng" placeholder="以换行分隔，例如：123">
+123
+10
+99
+44
+55</textarea>
+<label>色差:</label><textarea data="gap" placeholder="以换行分隔，例如：C1">
+A1
+B3
+C5
+E1
+A3</textarea>
+  </div>
+</script>
+<div id="J_form" class="form"></div>
+<div id="J_button" class="button">
+<button class="add" type="button">增加一行</button>
+<button class="view" type="button">预览报表</button>
+<button class="toexcel" type="button">生成excel</button>
+<button class="toggle" type="button">切换</button>
+</div>
+<script type="text/html" id="J_template">
+{{each data}}
+<h2>{{$index+1}}.Results by Inspected Rolls:</h2>
+  <table>
+    <thead>
+      <tr><td rowspan="2">Roll number</td><td rowspan="2">Color</td><td rowspan="2">Dyed lots</td><td>tot.width</td><td>actual</td><td colspan="{{$value.col}}">LENGTH PROGRESSION</td><td rowspan="2">Points</td><td rowspan="2">Defects</td><td rowspan="2">Point x<br>100SQ/m</td></tr>
+      <tr><td>length</td><td>actual</td><td colspan="{{$value.col}}">DESCRIPTION</td></tr>
+    </thead>
+    <tbody>
+      {{each $value.trs as valuetr j }}
+        <tr>
+          <td rowspan="2">{{$value.trs[j].roll}}</td>
+          <td rowspan="2">{{$value.color}}</td>
+          <td rowspan="2">{{$value.trs[j].gap}}</td>
+          <td>{{$value.width}}</td>
+          <td>{{$value.width}}</td>
+          {{each $value.trs[j].tds as valuetd x}}
+            <th>{{$value.trs[j].tds[x].type}}</th>
+          {{/each}}
+          <td rowspan="2">{{$value.trs[j].amt}}</td>
+          <td rowspan="2">{{$value.trs[j].cols}}</td>
+          <td rowspan="2">{{$value.trs[j].avg}}</td>
+        </tr>
+        <tr>
+          <td>{{$value.trs[j].leng}}</td>
+          <td>{{$value.trs[j].leng}}</td>
+          {{each $value.trs[j].tds as valuetd x}}
+            <th>{{$value.trs[j].tds[x].no}}</th>
+          {{/each}}
+        </tr>
+      {{/each}}
+    <tbody>
+    <tfoot>
+      <tr>
+        <td></td><td></td><td></td>
+        <td>tot length</td>
+        <td>Ave width</td>
+        {{each $value.totcol}}
+            <td></td>
+        {{/each}}
+        <td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td>
+        <td>{{$value.tot}}</td>
+        <td>{{$value.all}}</td>
+        {{each $value.totcol}}
+            <td></td>
+        {{/each}}
+        <td>Total</td>
+        <td>{{$value.totpoint}}</td><td>{{$value.totdefect}}</td><td>{{$value.totavg}}</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td>
+        {{each $value.totcol}}
+            <td></td>
+        {{/each}}
+        <td colspan="5">Minimum sum all points (20% difference)</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td>
+        {{each $value.totcol}}
+            <td></td>
+        {{/each}}
+        <td colspan="6">Minimum sum all points (except roll No)</td>
+      </tr>
+    </tfoot>
+  </table>
+  {{if $value.alltype}}
+  <div class="desc">
+    <p>
+    {{each $value.alltype as value z}}
+    <label>{{$value.alltype[z]}}</label>
+    {{/each}}
+    </p>
+    <table>
+    <thead><tr><td>Points to assign</td><td>Metric</td><td>Imperial</td></tr></thead>
+    <tbody>
+    <tr><td>1 point</td><td>Defects up to 7,5cm</td><td>Defects up to 3inch</td></tr>
+    <tr><td>2 point</td><td>Defects from 7.6cm to 14.9cm</td><td>Defects from 3.1inch to 5.9inch</td></tr>
+    <tr><td>3 point1 point</td><td>Defects from 15cm to 22.9cm</td><td>Defects from 6inch to 8.9inch</td></tr>
+    <tr><td>4 point</td><td>Defects longer than 23cm</td><td>Defects longer than 9inch</td></tr>
+    </tbody>
+    </table>
+  </div>
+  <div class="desc">
+    <p>Flaws in both directions, warp and weft, receive equal points.</p>
+    <p>Rolls with more than 1/2 of defects scored 1 point are not accepted. (14 or more defects per 100SQM)</p>
+    <p>No defects will be allowed in the first and last 2 metres of the piece.</p>
+    <p>A continuous defect in the warp direction can be no longer than 2 running meters in length. Each defective meter equals to a 4 point defect.</p>
+    <p>No linear meter (warp direction) can have assigned more than 4 points.</p>
+    <p>Holes of any size will be assigned 4 points.</p>
+    <p>Cutted or seamed fabric inside a roll is not accepted.</p>
+  </div>
+  <div class="desc">
+  <table>
+    <thead><tr><td>Limit of points</td><td>100 squared meters</td><td>100 squared yards</td></tr></thead>
+    <tbody>
+    <tr><td>Per roll</td><td>28 points</td><td>23 points</td></tr>
+    <tr><td>per shipment</td><td>20 points</td><td>17 points</td></tr>
+    </tbody>
+  </div>
+  {{/if}}
+{{/each}}
+</script>
+<div id="J_content" class="excel"></div>
+<script src="jquery-1.11.1.min.js"></script>
+<script src="template.js"></script>
+<script>
+var formemplate = $("#J_item").html(),
+    formcontent = $("#J_form"),
+    content = $("#J_content"),
+    btn = $("#J_button");
+
+btn.on("click",".add", function () {
+  formcontent.append(formemplate);
+}).on("click",".toggle",function(){
+  formcontent.toggle();
+  $(this).prevAll("button").toggle();
+}).on("click",".view", function(){
+  var data = [],
+      items = formcontent.find(".item"),
+      itemlength = items.length,
+      roll = 0;
+  for (var i = 0; i < itemlength; i++) {
+    var eq = items.eq(i),
+        t = {},
+        type = eq.find("[data='type']").val().replace(/\n/g,","),
+        types,
+        alltype,
+        gap = eq.find("[data='gap']").val().replace(/\n/g,","),
+        gaps,
+        leng = eq.find("[data='leng']").val().replace(/\n/g,","),
+        lengs,
+        width = parseFloat(eq.find("[data='width']").val()),
+        point = parseInt(eq.find("[data='point']").val()),
+        col = parseInt(eq.find("[data='col']").val()),
+        tot = 0,
+        all = 0,
+        totpoint = 0,
+        totdefect = 0;
+        totavg =0;
+    types = type.split(",");
+    alltype = type.split(",");
+    gaps = gap.split(",");
+    lengs = leng.split(",");
+    t.trs = [];
+    for (var j = 0; j < types.length; j++) {
+      types[j] = types[j].split(":")[0];
+    };
+    for (var j = 0; j < lengs.length; j++) {
+      len = parseFloat(lengs[j]) || 0;
+      var tr={},
+          amt = 0;
+      roll += 1;
+      tot += len;
+      all += width;
+      tr.roll = roll;
+      tr.leng = len;
+      tr.gap = gaps[j];
+      tr.tds = [];
+      //控制缺陷个数
+      var tempcol  = col*1.1;
+      var cols = Math.floor(Math.random()*tempcol);
+      if(len < 51 && col>3){ cols = Math.min(2,cols);}
+      if(len > 50 && cols < 3){ cols += 1;}
+      if(len > 150 && cols < 5){ cols += 3;}
+      cols = Math.max(1,cols);
+      cols = Math.min(cols, col-1);
+      for (var x = 0; x < col; x++) {
+        if(x < cols){
+          var points = Math.ceil(Math.random()*point);
+          var ts = Math.floor(Math.random()*types.length);
+          var no = Math.ceil(Math.random()*len);
+          amt += points;
+          tr.tds.push({type:types[ts]+points,no:no});
+        }else{
+          tr.tds.push({type:"",no:""})
+        }
+      };
+      tr.tds.sort(function compare(a,b){
+        var ta = a.no,
+            tb = b.no;
+        ta = !ta ? len+1 : ta;
+        tb = !tb ? len+1 : tb;
+        return ta==tb ? -1 : ta-tb;
+      });
+      tr.amt = amt;
+      var avg = amt*10000/width/len;
+      avg = Math.round(avg*100)/100;
+      tr.avg = avg;
+      tr.cols = cols;
+      totpoint += amt;
+      totdefect += cols;
+      totavg += avg;
+      t.trs.push(tr);
+    };
+    t.color = eq.find("[data='color']").val();
+    t.width = width;
+    t.point = point;
+    t.col = col;
+    t.type = types;
+    t.leng = lengs;
+    t.tot = tot;
+    t.totpoint = totpoint;
+    t.totdefect = totdefect;
+    t.totavg = Math.round(totavg*100)/100;
+    t.totcol = [];
+    if (data.length > 0 && JSON.stringify(alltype) === JSON.stringify(data[data.length-1].alltype)) {
+      data[data.length-1].alltype = false;
+    };
+    t.alltype = alltype;
+    for (var y = 0; y < col-1; y++) {
+      t.totcol.push("");
+    };
+    t.all = all;
+    data.push(t);
+  };
+  var html = template("J_template",{data:data});
+  content.html(html);
+}).find(".add").click();
+formcontent.on("click",".del", function(){
+  $(this).parents(".item").remove();
+}).on("click","input,textarea",function(){
+  $(this).select();
+});
+</script>
