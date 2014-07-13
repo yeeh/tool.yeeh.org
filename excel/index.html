@@ -18,11 +18,10 @@ h2{ margin-bottom: 4px;}
 .form input[type='number']{ width: 50px;}
 .form button{ float: right;}
 .form textarea{ width: 200px; height: 200px; border: solid 1px #ddd;}
-.button{ width: 300px; position: fixed; right: 0 ;top: 5%; text-align: right;}
+.button{ width: 150px; height: 150px; position: fixed; right: 0 ;top: 0; text-align: right; border:solid 1px #ccc;}
 .button button{ margin: 10px; border:solid 1px #ccc;}
-.button .toggle{ background-color: green;}
 button{ padding: 4px 10px; font-size: 16px;}
-.excel{ padding:100px 0 300px 0;}
+.excel{ padding:150px 0 300px 0;}
 .excel table{ border-collapse: collapse; width: 100%}
 .excel td, .excel th{ border:solid 1px #333; text-align: center; vertical-align: middle;}
 .excel th{ width: 5%; }
@@ -30,10 +29,11 @@ button{ padding: 4px 10px; font-size: 16px;}
 .excel tfoot td{ font-weight: bold;}
 .excel td[colspan='5']{ font-style: italic;}
 .excel td[colspan='6']{ text-align: right;}
-.desc{ padding: 4px 40px; font-size: 12px;}
-.desc p{ padding: 0; margin: 0;}
+.excel td.desc{ border-width:0;}
+.desc{ padding: 4px 0; font-size: 12px;}
+.desc p{ padding: 0; margin: 0 40px; text-align: left;}
 .desc p label{ display: inline-block; width:200px;}
-.desc table{ width: 80%}
+.desc table{ width: 80%; margin-left: 40px;}
 .desc thead td{ font-weight: bold;}
 </style>
 </head>
@@ -86,7 +86,6 @@ A3</textarea>
 <button class="add" type="button">增加一行</button>
 <button class="view" type="button">预览报表</button>
 <button class="toexcel" type="button">生成excel</button>
-<button class="toggle" type="button">切换</button>
 </div>
 <script type="text/html" id="J_template">
 {{each data}}
@@ -119,8 +118,7 @@ A3</textarea>
           {{/each}}
         </tr>
       {{/each}}
-    <tbody>
-    <tfoot>
+
       <tr>
         <td></td><td></td><td></td>
         <td>tot length</td>
@@ -154,26 +152,24 @@ A3</textarea>
         {{/each}}
         <td colspan="6">Minimum sum all points (except roll No)</td>
       </tr>
-    </tfoot>
-  </table>
+    </tbody>
   {{if $value.alltype}}
-  <div class="desc">
+  <tfoot><tr><td colspan="{{$value.col+8}}" class="desc">
     <p>
     {{each $value.alltype as value z}}
     <label>{{$value.alltype[z]}}</label>
     {{/each}}
     </p>
-    <table>
-    <thead><tr><td>Points to assign</td><td>Metric</td><td>Imperial</td></tr></thead>
+  <table>
+    <thead><tr><td colspan="3">Points to assign</td><td colspan="3">Metric</td><td colspan="3">Imperial</td></tr></thead>
     <tbody>
-    <tr><td>1 point</td><td>Defects up to 7,5cm</td><td>Defects up to 3inch</td></tr>
-    <tr><td>2 point</td><td>Defects from 7.6cm to 14.9cm</td><td>Defects from 3.1inch to 5.9inch</td></tr>
-    <tr><td>3 point</td><td>Defects from 15cm to 22.9cm</td><td>Defects from 6inch to 8.9inch</td></tr>
-    <tr><td>4 point</td><td>Defects longer than 23cm</td><td>Defects longer than 9inch</td></tr>
+    <tr><td colspan="3">1 point</td><td colspan="3">Defects up to 7,5cm</td><td colspan="3">Defects up to 3inch</td></tr>
+    <tr><td colspan="3">2 point</td><td colspan="3">Defects from 7.6cm to 14.9cm</td><td colspan="3">Defects from 3.1inch to 5.9inch</td></tr>
+    <tr><td colspan="3">3 point</td><td colspan="3">Defects from 15cm to 22.9cm</td><td colspan="3">Defects from 6inch to 8.9inch</td></tr>
+    <tr><td colspan="3">4 point</td><td colspan="3">Defects longer than 23cm</td><td colspan="3">Defects longer than 9inch</td></tr>
     </tbody>
     </table>
-  </div>
-  <div class="desc">
+  <div>
     <p>Flaws in both directions, warp and weft, receive equal points.</p>
     <p>Rolls with more than 1/2 of defects scored 1 point are not accepted. (14 or more defects per 100SQM)</p>
     <p>No defects will be allowed in the first and last 2 metres of the piece.</p>
@@ -182,15 +178,16 @@ A3</textarea>
     <p>Holes of any size will be assigned 4 points.</p>
     <p>Cutted or seamed fabric inside a roll is not accepted.</p>
   </div>
-  <div class="desc">
   <table>
-    <thead><tr><td>Limit of points</td><td>100 squared meters</td><td>100 squared yards</td></tr></thead>
+    <thead><tr><td colspan="3">Limit of points</td><td colspan="3">100 squared meters</td><td colspan="3">100 squared yards</td></tr></thead>
     <tbody>
-    <tr><td>Per roll</td><td>28 points</td><td>23 points</td></tr>
-    <tr><td>per shipment</td><td>20 points</td><td>17 points</td></tr>
+    <tr><td colspan="3">Per roll</td><td colspan="3">28 points</td><td colspan="3">23 points</td></tr>
+    <tr><td colspan="3">per shipment</td><td colspan="3">20 points</td><td colspan="3">17 points</td></tr>
     </tbody>
-  </div>
+  </table>
   {{/if}}
+  </td></tr></tfoot>
+  </table>
 {{/each}}
 </script>
 <div id="J_content" class="excel"></div>
@@ -202,12 +199,14 @@ var formemplate = $("#J_item").html(),
     content = $("#J_content"),
     btn = $("#J_button");
 
-btn.on("click",".add", function () {
+btn.on("click",".add", function (e) {
+  e.stopPropagation();
   formcontent.append(formemplate);
-}).on("click",".toggle",function(){
+}).on("click",function(){
   formcontent.toggle();
-  $(this).prevAll("button").toggle();
-}).on("click",".view", function(){
+  $(this).find("button").toggle();
+}).on("click",".view", function(e){
+  e.stopPropagation();
   var data = [],
       items = formcontent.find(".item"),
       itemlength = items.length,
