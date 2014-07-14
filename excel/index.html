@@ -43,8 +43,8 @@ button{ padding: 4px 10px; font-size: 16px;}
   <button class="del">删除<br>此行</button>
   <label>颜色:</label><input type="text" data="color" value="KAKA" />
   <label>宽度:</label><input type="number" data="width" value="100" />
-  <label>缺陷点:</label><input type="number" data="point" value="4" />
-  <label>缺陷列数:</label><input type="number" data="col" value="10" />
+  <label>缺陷点:</label><input type="number" data="point" value="3" />
+  <label>缺陷列数:</label><input type="number" data="maxcol" value="9" />/<input type="number" data="col" value="10" />
   <br>
   <label>缺陷类型:</label><textarea data="type" placeholder="以换行分隔，例如：A:Pinhole针眼洞">
 A:Pinhole针眼洞
@@ -72,13 +72,15 @@ W:Others其他</textarea>
 10
 99
 44
-55</textarea>
+55
+155</textarea>
 <label>色差:</label><textarea data="gap" placeholder="以换行分隔，例如：C1">
 A1
 B3
 C5
 E1
-A3</textarea>
+A3
+B1</textarea>
   </div>
 </script>
 <div id="J_form" class="form"></div>
@@ -224,6 +226,7 @@ btn.on("click",".add", function (e) {
         width = parseFloat(eq.find("[data='width']").val()),
         point = parseInt(eq.find("[data='point']").val()),
         col = parseInt(eq.find("[data='col']").val()),
+        maxcol = parseInt(eq.find("[data='maxcol']").val()),
         tot = 0,
         all = 0,
         totpoint = 0,
@@ -249,13 +252,14 @@ btn.on("click",".add", function (e) {
       tr.gap = gaps[j];
       tr.tds = [];
       //控制缺陷个数
-      var tempcol  = col*1.1;
+      var tempcol  = maxcol*1.1;
       var cols = Math.floor(Math.random()*tempcol);
-      if(len < 51 && col>3){ cols = Math.min(2,cols);}
-      if(len > 50 && cols < 3){ cols += 1;}
-      if(len > 150 && cols < 5){ cols += 3;}
+      if(len < 5*col){ cols += Math.min(0.1*col,cols); cols = Math.min(0.2*col,cols);}
+      if(len >= 5*col && len < 8*col){ cols = Math.min(0.3*col,cols); cols = Math.max(0.2*col,cols);}
+      if(len >= 8*col && len < 12*col){ cols = Math.min(0.6*col,cols); cols = Math.max(0.3*col,cols);}
+      if(len >= 12*col && len < 15*col){ cols = Math.min(0.8*col,cols); cols = Math.max(0.4*col,cols);}
+      if(len >= 15*col){ cols = Math.min(maxcol,cols); cols= Math.max(0.6*col,cols);}
       cols = Math.max(1,cols);
-      cols = Math.min(cols, col-1);
       for (var x = 0; x < col; x++) {
         if(x < cols){
           var points = Math.ceil(Math.random()*point);
@@ -276,7 +280,7 @@ btn.on("click",".add", function (e) {
       });
       tr.amt = amt;
       var avg = amt*10000/width/len;
-      avg = Math.round(avg*100)/100;
+      avg = Math.round(avg*10)/10;
       tr.avg = avg;
       tr.cols = cols;
       totpoint += amt;
