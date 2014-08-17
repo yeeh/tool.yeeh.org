@@ -17,7 +17,8 @@ h2{ margin-bottom: 4px;}
 .form input[type='text']{ width: 60px;}
 .form input[type='number']{ width: 50px;}
 .form button{ float: right;}
-.form textarea{ width: 200px; height: 200px; border: solid 1px #ddd;}
+.form textarea{ width: 100px; height: 200px; border: solid 1px #ddd;}
+.form textarea:nth-of-type(1){ width: 200px;}
 .button{ width: 150px; height: 150px; position: fixed; right: 0 ;top: 0; text-align: right; border:solid 1px #ccc;}
 .button button{ margin: 10px; border:solid 1px #ccc;}
 button{ padding: 4px 10px; font-size: 16px;}
@@ -67,6 +68,13 @@ T:Water spot水渍
 U:White yarn蛇皮丝
 V:Broken yarn断纱
 W:Others其他</textarea>
+<label>编号:</label><textarea data="rollno" placeholder="以换行分隔，例如：123">
+1
+10
+9
+8
+5
+6</textarea>
 <label>材料长度:</label><textarea data="leng" placeholder="以换行分隔，例如：123">
 123
 10
@@ -221,6 +229,8 @@ btn.on("click",".add", function (e) {
         alltype,
         gap = eq.find("[data='gap']").val().replace(/\n/g,","),
         gaps,
+        rollno = eq.find("[data='rollno']").val().replace(/\n/g,","),
+        rollnos,
         leng = eq.find("[data='leng']").val().replace(/\n/g,","),
         lengs,
         width = parseFloat(eq.find("[data='width']").val()),
@@ -235,6 +245,7 @@ btn.on("click",".add", function (e) {
     types = type.split(",");
     alltype = type.split(",");
     gaps = gap.split(",");
+    rollnos = rollno.split(",");
     lengs = leng.split(",");
     t.trs = [];
     for (var j = 0; j < types.length; j++) {
@@ -247,7 +258,7 @@ btn.on("click",".add", function (e) {
       roll += 1;
       tot += len;
       all += width;
-      tr.roll = roll;
+      tr.roll = rollnos[j]; //roll
       tr.leng = len;
       tr.gap = gaps[j];
       tr.tds = [];
