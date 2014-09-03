@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,6 +210,19 @@ var formemplate = $("#J_item").html(),
     content = $("#J_content"),
     btn = $("#J_button");
 
+function val(element,data){
+  return element.find("[data='"+data+"']").val();
+}
+function arr(element,data){
+  var str = val(element,data);
+  str = str.replace(/\n/g,",");
+  var arr = str.split(",");
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === "") {arr.splice(i,1)}
+  }
+  return arr;
+}
+
 btn.on("click",".add", function (e) {
   e.stopPropagation();
   formcontent.append(formemplate);
@@ -224,29 +238,20 @@ btn.on("click",".add", function (e) {
   for (var i = 0; i < itemlength; i++) {
     var eq = items.eq(i),
         t = {},
-        type = eq.find("[data='type']").val().replace(/\n/g,","),
-        types,
-        alltype,
-        gap = eq.find("[data='gap']").val().replace(/\n/g,","),
-        gaps,
-        rollno = eq.find("[data='rollno']").val().replace(/\n/g,","),
-        rollnos,
-        leng = eq.find("[data='leng']").val().replace(/\n/g,","),
-        lengs,
-        width = parseFloat(eq.find("[data='width']").val()),
-        point = parseInt(eq.find("[data='point']").val()),
-        col = parseInt(eq.find("[data='col']").val()),
-        maxcol = parseInt(eq.find("[data='maxcol']").val()),
+        types = arr(eq,"type"),
+        alltype = arr(eq,"type"),
+        gaps = arr(eq,"gap"),
+        rollnos = arr(eq,"rollno"),
+        lengs = arr(eq,"leng"),
+        width = parseFloat(val(eq,"width")),
+        point = parseInt(arr(eq,"point")),
+        col = parseInt(arr(eq,"col")),
+        maxcol = parseInt(arr(eq,"maxcol")),
         tot = 0,
         all = 0,
         totpoint = 0,
         totdefect = 0;
         totavg =0;
-    types = type.split(",");
-    alltype = type.split(",");
-    gaps = gap.split(",");
-    rollnos = rollno.split(",");
-    lengs = leng.split(",");
     t.trs = [];
     for (var j = 0; j < types.length; j++) {
       types[j] = types[j].split(":")[0];
