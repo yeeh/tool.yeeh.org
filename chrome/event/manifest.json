@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "chrome test",
+  "version": "1.0",
+
+  "description": "chrome test",
+  "icons": {
+    "16" : "assets/icon16.png",
+    "128": "assets/icon128.png"
+  },
+
+  "content_scripts" :[
+    {
+      "matches" : ["*://tool.yeeh.org/chrome/evnet/*"],
+      "js" : ["jquery-1.11.1.min.js","3.js"]
+    }
+  ],
+
+
+
+}

@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "chrome getjs test",
+  "version": "1.0",
+
+  "description": "chrome getjs test",
+  "icons": {
+    "16" : "assets/icon16.png",
+    "128": "assets/icon128.png"
+  },
+
+  "content_scripts" :[
+    {
+      "matches" : ["*://tool.yeeh.org/chrome/getjs/*"],
+      "js" : ["1.js"]
+    }
+  ],
+
+
+
+}
