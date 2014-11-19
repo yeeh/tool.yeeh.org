@@ -5,8 +5,8 @@
 
   "description": "chrome getjs test",
   "icons": {
-    "16" : "assets/icon16.png",
-    "128": "assets/icon128.png"
+    "16" : "icon16.png",
+    "128": "icon128.png"
   },
 
   "content_scripts" :[
@@ -14,7 +14,7 @@
       "matches" : ["*://tool.yeeh.org/chrome/getjs/*"],
       "js" : ["1.js"]
     }
-  ],
+  ]
 
 
 
