@@ -11,7 +11,7 @@
 
   "content_scripts" :[
     {
-      "matches" : ["*://tool.yeeh.org/chrome/evnet/*"],
+      "matches" : ["*://tool.yeeh.org/chrome/event/*"],
       "js" : ["jquery-1.11.1.min.js","3.js"]
     }
   ]
