@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -263,117 +264,7 @@ body {
 .zrbj span:nth-child(1){ margin-right:8px;}
 .look_alltext p{ padding-top:6px;}
 .look_alltext{ padding:0 15px 7px 15px;}
-</style>    <script src="http://y0.ifengimg.com/a/2015/0708/swiper.min.js"></script>
-    <script src="http://y3.ifengimg.com/a/2015/0716/jquery-2.1.4.min.js"></script>
-    <script src="http://y3.ifengimg.com/a/2015/0716/jquery.lazyload.min.js"></script>
-<script>
-//acVids playPause
-function func_animate(idx) {
-    for (var i = 1; i < window.acVids.slides.length; i++) {
-        var vidBtn = document.getElementById("vidBtn" + i);
-        var myVideo = document.getElementById("vid" + i);
-        if (idx != i - 1) {
-            myVideo.pause();
-            myVideo.width = 1;
-            myVideo.height = 1;
-        }
-    }
-}
-
-function playPause(name, curr, n) {
-    for (i = 1; i <= n; i++) {
-        var vidBtn = document.getElementById(name + "Btn" + i);
-        var myVideo = document.getElementById(name + i);
-        if (i == curr) {
-            if (myVideo.paused) {
-                myVideo.play();
-                myVideo.className="vidSize";
-            } else {
-                myVideo.pause();
-                myVideo.className="";
-            }
-        } else {
-            vidBtn.className = "vidBtn";
-            myVideo.pause();
-        }
-    }
-}
-
-window.onload = function() {
-    //Menu
-    var acMenu = document.getElementById("acMenu"),
-        acMenuSpan = acMenu.getElementsByTagName("span"),
-        main = document.getElementById("main"),
-        acNavBox = document.getElementById("acNavBox"),
-        acNavBoxBg = document.getElementById("acNavBoxBg");
-
-    acMenu.addEventListener('touchend', function() {
-        if (this.clientHeight == 17) {
-            this.style.height = 16 + "px";
-            acMenuSpan[0].style.webkitTransform = "rotate(45deg) translate(5px,5px)";
-            acMenuSpan[1].style.opacity = 0;
-            acMenuSpan[2].style.webkitTransform = "rotate(-45deg) translate(5px,-5px)";
-            acNavBox.style.height = "auto";
-            acNavBoxBg.style.height = main.clientHeight - 50 + "px";
-        } else {
-            this.style.height = 17 + "px";
-            acMenuSpan[0].style.webkitTransform = "rotate(0deg) translate(0px,0px)";
-            acMenuSpan[1].style.opacity = 1;
-            acMenuSpan[2].style.webkitTransform = "rotate(0deg) translate(0px,0px)";
-            acNavBox.style.height = 0;
-            acNavBoxBg.style.height = 0;
-        }
-    }, false);
-
-    //acVids
-    window.acVids = new Swiper(".acVids", {
-        pagination: '.acVids-pagination',
-        onSlideChangeEnd: function() {
-            func_animate(window.acVids.activeIndex);
-        }
-    });
-
-    //totop
-    var scrolltop = document.body.scrollTop || document.documentElement.scrollTop;
-    if (navigator.userAgent.indexOf("Android 2.2") == -1) {
-        window.onscroll = function() {
-            var st = document.body.scrollTop || document.documentElement.scrollTop;
-            if (st < scrolltop && st != 0) {
-                document.getElementById("acTopBox").style.display = "block";
-            } else {
-                document.getElementById("acTopBox").style.display = "none";
-            }
-            scrolltop = st
-        }
-    }
-}
-</script>    <script>
-        $(function() {
-            $("img.lazys").lazyload({
-                "placeholder": "http://y2.ifengimg.com/a/2015/0728/d2414420f865effsize10_w346_h246.png",
-                "effect": "fadeIn",
-                "threshold": "1080"
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        /*统计探针必备变量*/
-        var gloableSettings = {
-            "domain": "inews.ifeng.com",
-            "channelPath": "/mainland/",
-            "docType": "article",
-            "comment": {
-                "docUrl": "http://news.ifeng.com/a/20160104/46935624_0.shtml",
-                "docName": "疑似国产航母进展曝光：机库已成型(组图)",
-                "dataId": "46935624",
-                "docType": "0",
-                "skey": "1F3E36",
-                "pageUrl": "http://inews.ifeng.com/46935624/news.shtml"
-            }
-        };
-        var globalSettings = gloableSettings;
-    </script>
-<script src="http://m1.ifengimg.com/ifeng/mif/mobile_inice_v1.js"></script></head>
+</style>    </head>
 
 <body>
     <div class="main" id="main">
@@ -465,58 +356,7 @@ window.onload = function() {
             <div class="acAd1">
 <div style="display:none;"><script>mobile_ap_functions.display(1306);</script></div>                <div class="adcoop">
 <div id="firstCoop" data-links="%5B%7B%22id%22%3A%223%22%2C%22title%22%3A%22%E5%A5%B9%E5%AE%B6%E8%B5%84%E4%BA%A7270%E4%BA%BF%20%E5%8D%B4%E5%AB%81%E7%BB%99%E2%80%9C%E5%8E%95%E6%89%80%E9%97%A8%E2%80%9D%E7%94%B7%E4%B8%BB%22%2C%22pageUrl%22%3A%22http%3A%2F%2Fi.ifeng.com%2Fnews%2Fsharenews.f%3Faid%3D104805199%26ch%3Dnews_sf%22%2C%22i_thumbnail%22%3A%22%22%7D%2C%7B%22id%22%3A%223%22%2C%22title%22%3A%22%E6%9C%89%E7%88%B1%EF%BC%81%E4%B8%A4%E5%8F%AA%E5%A4%A7%E7%8C%A9%E7%8C%A9%E5%A4%A7%E6%89%93%E5%87%BA%E6%89%8B%E5%B0%8F%E7%8C%A9%E7%8C%A9%E5%8A%9D%E6%9E%B6%22%2C%22pageUrl%22%3A%22http%3A%2F%2Ftv.ifeng.com%2Fsftg%2Fdy%2Findex.shtml%22%2C%22i_thumbnail%22%3A%22%22%7D%5D" data-linkcount="1"></div>
-<script>
-	//渠道广告js
-	(function(){
-        var that= $("#firstCoop");
-        var links = decodeURIComponent(that.data("links"));
-        var linkArr = JSON.parse(links);
-        var linkCount = that.data("linkcount");
-        if(!isNaN(linkCount)){
-            linkCount = parseInt(linkCount);
-        }else{
-            linkCount = 1;
-        }
-        var html="";
-        for(var i=0;i<linkCount && i<linkArr.length;i++){
-            var link=linkArr[Math.floor(Math.random()*linkArr.length)];
-            html+='<a href="'+ link.pageUrl +'" data-href="'+ link.pageUrl +'" data-title="'+ link.title +'" data-id="'+ link.id +'" target="_blank">'+ link.title +'</a>';
-        }
-        var adContainer = that.parent();    
-        if(adContainer[0].tagName.toLowerCase()=="body"){
-            adContainer = that;
-        }
-        adContainer.html(html).find("a").on("click",function(e){
-			//debugger;	
-			var obj=this;
-			var alink;
-			if(obj.tagName.toLowerCase()=="li"){
-				alink = $(obj).find("a");
-			}else if(obj.tagName.toLowerCase()=="a"){
-				alink = $(obj);
-			}
-			//发送统计然后跳转到渠道链接
-			var alinkData = alink.data();
-			var staParams={
-				datatype:"wapch",
-				uri:location.href,
-				ref:alinkData.id,
-				sid:alinkData.href,
-				uid:ifeng.cookieUtil.getMid() || request["mid"] || ifeng.util.uuid(),
-				time:new Date().getTime()
-			};
-			var paramsString = "";
-			for(var key in staParams){
-				var value = staParams[key];
-				if(value!=null){
-					if(paramsString!="") paramsString+="&";
-					paramsString+= key + "=" + encodeURIComponent(value);
-				}
-			}
-			getScript("http://stadig.ifeng.com/actsta.js?" +paramsString);　
-		});
-	})();
-</script>                </div>
+    </div>
                 <div class="adcoop">
                 </div>
             </div>
@@ -537,7 +377,7 @@ window.onload = function() {
             </div>
             <!--acTxtTip-->
                 <!--acTxtPics-->
-            <p class="detailPic"><img src="http://y1.ifengimg.com/a/2016_02/b55b9a68ad240c4.jpg" alt="" class=" lazys" data-original="http://y1.ifengimg.com/a/2016_02/b55b9a68ad240c4.jpg" /></p><p class="detailPic"><img src="http://y2.ifengimg.com/a/2016_02/1fdd1d3fd917e57.jpg" alt="" class=" lazys" data-original="http://y2.ifengimg.com/a/2016_02/1fdd1d3fd917e57.jpg" /></p><p class="picIntro" style="text-align: left;"><span>近日，一艘国产大型水面作战舰船的最新进展照片在网络上曝光，可以看到其正在进行分段的吊装工作。（鸣谢：超大军事）</span></p><p>近日，一艘国产大型水面作战舰船的最新进展照片在网络上曝光，可以看到其正在进行分段的吊装工作及摆放在建造现场的分段模块，目前建造进展曝光。</p><p class="detailPic"><img src="http://y0.ifengimg.com/a/2016_02/442823cce6da94e.jpg" alt="" class=" lazys" data-original="http://y0.ifengimg.com/a/2016_02/442823cce6da94e.jpg" /></p><p class="picIntro"><span>摆放在建造现场的分段模块（鸣谢：超大军事）</span></p>
+            <p class="detailPic"><img src="http://y1.ifengimg.com/a/2016_02/b55b9a68ad240c4.jpg" alt="" class=" lazys" data-original="http://y1.ifengimg.com/a/2016_02/b55b9a68ad240c4.jpg" /></p><p class="detailPic"><img src="http://y2.ifengimg.com/a/2016_02/1fdd1d3fd917e57.jpg" alt="" class=" lazys" data-original="http://y2.ifengimg.com/a/2016_02/1fdd1d3fd917e57.jpg" /></p><p class="picIntro" style="text-align: left;"><span>近日，一艘国产大型水面作战舰船的最新进展照片在网络上曝光，可以看到其正在进行分段的吊装工作。（鸣谢：超大军事）</span></p><p>近日，一艘国产大型水面作战舰船的最新进展照片在网络上曝光，可以看到其正在进行分段的吊装工作及摆放在建造现场的分段模块，曝光了目前的建造进展。</p><p class="detailPic"><img src="http://y0.ifengimg.com/a/2016_02/442823cce6da94e.jpg" alt="" class=" lazys" data-original="http://y0.ifengimg.com/a/2016_02/442823cce6da94e.jpg" /></p><p class="picIntro"><span>摆放在建造现场的分段模块（鸣谢：超大军事）</span></p>
              <div class="zrbj">责任编辑：<span>雒效文</span><span>PN066</span></div><!--1224a-->
             <!--acTxtVids-->
             <!--readAll-->
@@ -560,7 +400,7 @@ window.onload = function() {
         </div>
         <!-- 单页视频VV统计JS -->
 
-<script src="http://y0.ifengimg.com/a/2015/0928/vv_sta_4news_v1.2.js"></script><!-- 视频播放VV统计 -->
+<!-- 视频播放VV统计 -->
         <!--acTxt end-->
         <!--acRelev-->
         <!--acCmt begin-->
@@ -611,7 +451,7 @@ window.onload = function() {
             </div>
             <p class="hot_word">热词：<a href="http://i.ifeng.com/search/new_searchJump?q=游戏陪玩实为卖淫&type=baidu_sousuo&search_local=hotword&from=1013231c">游戏陪玩实为卖淫</a>
                 <a href="http://i.ifeng.com/search/new_searchJump?q=骗来20万被人骗光&type=baidu_sousuo&search_local=hotword">骗来20万被人骗光</a>
-            </p>        
+            </p>
         </div>        </div>
 
         <!--acCmt end-->
@@ -630,13 +470,13 @@ window.onload = function() {
                         <img  class="lazys" src="http://d.ifengimg.com/w346_h245/y2.ifengimg.com/a/2016/0104/deaad1992540c20size123_w750_h442.jpg" alt="游客向悬棺内投钱 古人遗骸被挡"/>
                 <p>游客向悬棺内投钱 古人遗骸被挡</p>
             </a>
-        </div>      
+        </div>
         <div>
                 <a  href="/46926650/news.shtml?srctag=tj_1">
                         <img  class="lazys" src="http://d.ifengimg.com/w346_h245/y2.ifengimg.com/a/2016/0104/7580d60ad86ecdcsize41_w750_h442.jpg" alt="小狗遭虐待后 一碰就嚎叫"/>
                 <p>小狗遭虐待后 一碰就嚎叫</p>
             </a>
-        </div>      
+        </div>
     </div>
             <div class="acPicCon adcoop" id="adcoop3">
             </div>
@@ -669,74 +509,74 @@ window.onload = function() {
         <!--acPicBox end-->
         <!--acOrigBox-->
         <div class="acOrigBox wrap">
-<div class="acBoxTit">精彩推荐</div><ul class="acOrigLis">  
-    <li> 
+<div class="acBoxTit">精彩推荐</div><ul class="acOrigLis">
+    <li>
             <a  href="/46929571/news.shtml?srctag=tj_2">
                 <img  class="lazys" data-original="http://d.ifengimg.com/w180_h130/y1.ifengimg.com/cmpp/2016/01/04/b15b693c515b6c90d3dfa94f06b68166_size52_w182_h130.jpg" alt="广州：拆迁户行贿100万伪造证件 多获600余万补偿"/>
-        </a> 
-        <div> 
+        </a>
+        <div>
             <p>
                     <a  href="/46929571/news.shtml?srctag=tj_2">
                 广州：拆迁户行贿100万伪造证件 多获600余万补偿
                 </a>
-            </p> 
+            </p>
 
                 <div class="clearfix">
                     <span>信息时报</span>
                     <a href="http://i.ifeng.com/icommon/comlist.shtml?docName=%E5%B9%BF%E5%B7%9E%EF%BC%9A%E6%8B%86%E8%BF%81%E6%88%B7%E8%A1%8C%E8%B4%BF100%E4%B8%87%E4%BC%AA%E9%80%A0%E8%AF%81%E4%BB%B6%20%E5%A4%9A%E8%8E%B7600%E4%BD%99%E4%B8%87%E8%A1%A5%E5%81%BF&docUrl=http%3A%2F%2Fnews.ifeng.com%2Fa%2F20160104%2F46929571_0.shtml&pageUrl=%2F46929571%2Fnews.shtml"><span class="pl_all" docurl="http://news.ifeng.com/a/20160104/46929571_0.shtml"></span><span></span></a>
-                </div> 
-        </div> 
+                </div>
+        </div>
     </li>
-    <li> 
+    <li>
             <a  href="/46929743/news.shtml?srctag=tj_2">
                 <img  class="lazys" data-original="http://d.ifengimg.com/w180_h130/y3.ifengimg.com/cmpp/2016/01/04/03/18b4796a-4117-4b62-95d1-efe9013ae5f2_size13_w316_h210.jpg" alt="女子买房发现少赠送45m²露台 开发商：笔误(图)"/>
-        </a> 
-        <div> 
+        </a>
+        <div>
             <p>
                     <a  href="/46929743/news.shtml?srctag=tj_2">
                 女子买房发现少赠送45m²露台 开发商：笔误(图)
                 </a>
-            </p> 
+            </p>
 
                 <div class="clearfix">
                     <span>华商报</span>
                     <a href="http://i.ifeng.com/icommon/comlist.shtml?docName=%E5%A5%B3%E5%AD%90%E4%B9%B0%E6%88%BF%E5%8F%91%E7%8E%B0%E5%B0%91%E8%B5%A0%E9%80%8145m%C2%B2%E9%9C%B2%E5%8F%B0%20%E5%BC%80%E5%8F%91%E5%95%86%EF%BC%9A%E7%AC%94%E8%AF%AF(%E5%9B%BE)&docUrl=http%3A%2F%2Fnews.ifeng.com%2Fa%2F20160104%2F46929743_0.shtml&pageUrl=%2F46929743%2Fnews.shtml"><span class="pl_all" docurl="http://news.ifeng.com/a/20160104/46929743_0.shtml"></span><span></span></a>
-                </div> 
-        </div> 
+                </div>
+        </div>
     </li>
-    <li> 
+    <li>
             <a  href="/46928725/news.shtml?srctag=tj_2">
                 <img  class="lazys" data-original="http://d.ifengimg.com/w180_h130/y3.ifengimg.com/cmpp/2016/01/04/00/a67ff906-40e0-40b3-a6a5-a43204005977_size21_w484_h218.jpg" alt="女子收到10086积分短信 打开链接后丢了9000元(图)"/>
-        </a> 
-        <div> 
+        </a>
+        <div>
             <p>
                     <a  href="/46928725/news.shtml?srctag=tj_2">
                 女子收到10086积分短信 打开链接后丢了9000元(图)
                 </a>
-            </p> 
+            </p>
 
                 <div class="clearfix">
                     <span>齐鲁网</span>
                     <a href="http://i.ifeng.com/icommon/comlist.shtml?docName=%E5%A5%B3%E5%AD%90%E6%94%B6%E5%88%B010086%E7%A7%AF%E5%88%86%E7%9F%AD%E4%BF%A1%20%E6%89%93%E5%BC%80%E9%93%BE%E6%8E%A5%E5%90%8E%E4%B8%A2%E4%BA%869000%E5%85%83(%E5%9B%BE)&docUrl=http%3A%2F%2Fnews.ifeng.com%2Fa%2F20160104%2F46928725_0.shtml&pageUrl=%2F46928725%2Fnews.shtml"><span class="pl_all" docurl="http://news.ifeng.com/a/20160104/46928725_0.shtml"></span><span></span></a>
-                </div> 
-        </div> 
+                </div>
+        </div>
     </li>
-    <li> 
+    <li>
             <a  href="/46929789/news.shtml?srctag=tj_2">
                 <img  class="lazys" data-original="http://d.ifengimg.com/w180_h130/y2.ifengimg.com/a/2016_02/55715ab3bae4a4a.jpg" alt="女大学生与两学弟开房后坠亡 正被其中一人追求(图)"/>
-        </a> 
-        <div> 
+        </a>
+        <div>
             <p>
                     <a  href="/46929789/news.shtml?srctag=tj_2">
                 女大学生与两学弟开房后坠亡 正被其中一人追求(图)
                 </a>
-            </p> 
+            </p>
 
                 <div class="clearfix">
                     <span></span>
                     <a href="http://i.ifeng.com/icommon/comlist.shtml?docName=%E5%A5%B3%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%B8%8E%E4%B8%A4%E5%AD%A6%E5%BC%9F%E5%BC%80%E6%88%BF%E5%90%8E%E5%9D%A0%E4%BA%A1%20%E6%AD%A3%E8%A2%AB%E5%85%B6%E4%B8%AD%E4%B8%80%E4%BA%BA%E8%BF%BD%E6%B1%82(%E5%9B%BE)&docUrl=http%3A%2F%2Fnews.ifeng.com%2Fa%2F20160104%2F46929789_0.shtml&pageUrl=%2F46929789%2Fnews.shtml"><span class="pl_all" docurl="http://news.ifeng.com/a/20160104/46929789_0.shtml"></span><span></span></a>
-                </div> 
-        </div> 
+                </div>
+        </div>
     </li>
 </ul>            <ul class="acOrigLis">
 <li style="display:none;"><script>mobile_ap_functions.display(1765);</script></li>            </ul>
@@ -842,47 +682,8 @@ window.onload = function() {
         </div>
         <!--end-->
     </div>
-<!-- 统计探针 -->
-<script src="http://y1.ifengimg.com/a/2014/tv/v6/sta_collection_common_v12.js"></script>
-<script src="http://y1.ifengimg.com/a/2014/tv/v6/sta_collection_4_pv_v10.js"></script>
-<!-- 统计探针end --><!--评论、调查、顶、排行榜、渠道-->
-<!-- script src="http://y3.ifengimg.com/a/i/i_content_hd_v1.1.3.js"></script -->
-<script src="http://y0.ifengimg.com/a/2015/1016/i_content_hd_v1.1.5.js"></script>
-<script>
-(function(){
-    if(window.location.href.indexOf("zbs_baidu_ydkp")>0){
-        var acAd = $(".acAd1");
-        if(acAd!=null && acAd.length>0){
-            $(acAd[0]).find("div").each(function (){
-                var that = $(this);
-                if(that.attr("class")!="adcoop") that.remove();
-            })
-        }
-    }
-})()
-function getUrlParamByName(name){  
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");  
-    var r = window.location.search.substr(1).match(reg);  
-    if (r!=null) return unescape(r[2]); return null;  
-} 
-(function(){
-    var ch = getUrlParamByName("ch");
-    if(ch!=null){
-        $(".countpage").find("a").each(function(){
-            var a = $(this);
-            var href = a.attr("href");
-            if(href.indexOf("news.shtml")>0){
-                if(href.indexOf("?")>0){
-                    a.attr("href",href+"&ch="+ch);
-                }else{
-                    a.attr("href",href+"?ch="+ch);
-                }
-            } 
-        });
-    }
-})();
-</script><script src="http://m1.ifengimg.com/ifeng/mif/mobile_aptj_v1.js"></script>
-    <img src="http://218.206.84.106/tj.jsp" alt="." style="display:none;"/><!-- fohq  无线业务的推广走量-->
+
+
 </body>
 
 </html>
