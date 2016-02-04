@@ -276,6 +276,7 @@ btn.on("click",".add", function (e) {
       if(len >= 12*col && len < 15*col){ cols = Math.min(0.8*col,cols); cols = Math.max(0.4*col,cols);}
       if(len >= 15*col){ cols = Math.min(maxcol,cols); cols= Math.max(0.6*col,cols);}
       cols = Math.max(1,cols);
+      cols = Math.min(cols,maxcol);
       for (var x = 0; x < col; x++) {
         if(x < cols){
           var points = Math.ceil(Math.random()*point);
