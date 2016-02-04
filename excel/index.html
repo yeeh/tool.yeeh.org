@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -245,8 +244,8 @@ btn.on("click",".add", function (e) {
         lengs = arr(eq,"leng"),
         width = parseFloat(val(eq,"width")),
         point = parseInt(arr(eq,"point")),
-        col = parseInt(arr(eq,"col")),
         maxcol = parseInt(arr(eq,"maxcol")),
+        col = parseInt(arr(eq,"col")),
         tot = 0,
         all = 0,
         totpoint = 0,
@@ -271,10 +270,10 @@ btn.on("click",".add", function (e) {
       var tempcol  = maxcol*1.1;
       var cols = Math.floor(Math.random()*tempcol);
       if(len < 5*col){ cols += Math.min(0.1*col,cols); cols = Math.min(0.2*col,cols);}
-      if(len >= 5*col && len < 8*col){ cols = Math.min(0.3*col,cols); cols = Math.max(0.2*col,cols);}
-      if(len >= 8*col && len < 12*col){ cols = Math.min(0.6*col,cols); cols = Math.max(0.3*col,cols);}
-      if(len >= 12*col && len < 15*col){ cols = Math.min(0.8*col,cols); cols = Math.max(0.4*col,cols);}
-      if(len >= 15*col){ cols = Math.min(maxcol,cols); cols= Math.max(0.6*col,cols);}
+      if(len >= 5*col && len < 9*col){ cols = Math.min(0.4*col,cols); cols = Math.max(0.2*col,cols);}
+      if(len >= 9*col && len < 12*col){ cols = Math.min(0.6*col,cols); cols = Math.max(0.3*col,cols);}
+      if(len >= 12*col && len < 16*col){ cols = Math.min(0.8*col,cols); cols = Math.max(0.4*col,cols);}
+      if(len >= 16*col){ cols = Math.min(maxcol,cols); cols= Math.max(0.6*col,cols);}
       cols = Math.max(1,cols);
       cols = Math.min(cols,maxcol);
       for (var x = 0; x < col; x++) {
