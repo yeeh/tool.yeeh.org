@@ -3,7 +3,7 @@
 # ---------------------- #
 name: Perry's tools
 baseurl:
-url: http://tool.yeh.sh
+url: https://tool.yeh.sh
 keywords: tools
 description: Perry's tools
 
@@ -14,7 +14,7 @@ safe: true
 auto: true
 rouge: true
 markdown: kramdown
-timezone: Asia/Shanghai
+timezone: America/Los_Angeles
 
 # ---------------------- #
 # deployment             #
