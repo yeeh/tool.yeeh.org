@@ -20,7 +20,7 @@ p:nth-child(2) a, a:hover{color: #999;}
 <h1>{{ site.name }}</h1>
 <p><a href="https://www.yeh.sh/" rel="me">Yeh</a></p>
 </div>
-<div>
+<div id='container'>
     说过如果不让他给别人听过人听过M<br>
     说过如果不让他给别人听过人听过M<br>
     说过如果不让他给别人听过人听过M<br>
@@ -42,7 +42,7 @@ p:nth-child(2) a, a:hover{color: #999;}
         var height = null;
         function changeHeight() {
             if (document.body.scrollHeight != height) {
-                // height = document.body.scrollHeight;
+                 //height = document.body.scrollHeight;
                 height = document.getElementById('container').offsetHeight;
                 alert(height);
                 if (window.postMessage) {
