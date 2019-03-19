@@ -28,18 +28,10 @@
 </div>
 
 <script>
-    (function () {
-        var height = null;
-        function changeHeight() {
-            if (document.body.scrollHeight != height) {
-                //height = document.body.scrollHeight;
-                height = document.getElementById('container').offsetHeight;
-                alert(height);
-                document.title = height;
-            }
-        }
-        setTimeout(changeHeight, 1000);
-    }())
+    window.onload=function(){
+        window.location.hash = 1;
+        document.title = document.body.clientHeight;
+    }
 </script>
 </body>
 </html>
