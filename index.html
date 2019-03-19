@@ -44,6 +44,7 @@ p:nth-child(2) a, a:hover{color: #999;}
             if (document.body.scrollHeight != height) {
                 // height = document.body.scrollHeight;
                 height = document.getElementById('container').offsetHeight;
+                alert(height);
                 if (window.postMessage) {
                     window.postMessage(JSON.stringify({
                         type: 'setHeight',
