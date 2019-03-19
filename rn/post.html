@@ -35,7 +35,9 @@
                 //height = document.body.scrollHeight;
                 height = document.getElementById('container').offsetHeight;
                 alert(height);
+                alert(window.postMessage);
                 if (window.postMessage) {
+                    alert('post');
                     window.postMessage(JSON.stringify({
                         type: 'setHeight',
                         height: height,
